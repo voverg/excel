@@ -3,9 +3,9 @@ const cods = {
     Z: 90
 }
 
-function createCell() {
+function toCell() {
     return `
-        <div class="cell" contenteditable>B1</div>
+        <div class="cell" contenteditable></div>
     `
 }
 
@@ -15,10 +15,10 @@ function toColumn(colContent) {
     `
 }
 
-function createRow(content) {
+function createRow(content, index = '') {
     return `
         <div class="row">
-            <div class="row-info"></div>
+            <div class="row-info">${index}</div>
             <div class="row-data">${content}</div>
         </div>
     `
@@ -38,7 +38,17 @@ export function createTable(rowsCount = 15) {
         .map(toColumn)
         .join('');
 
+    // The first row
     rows.push(createRow(cols))
+    // The other rows
+    for (let i = 0; i < rowsCount; i++) {
+        const cells = new Array(colsCount)
+            .fill('')
+            .map(toCell)
+            .join('');
+
+        rows.push(createRow(cells, i + 1));
+    }
 
     return rows.join('');
 }
