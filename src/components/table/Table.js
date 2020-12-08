@@ -17,24 +17,30 @@ export class Table extends ExcelComponent {
         return createTable(20);
     }
 
-//     onClick(event) {
-//         console.log('Click', event.target);
-//     }
-
     onMousedown(event) {
         if (event.target.dataset.resize) {
             const $resizer = $(event.target);
             const $parent = $resizer.closest('[data-type="resizable"]');
             const coords = $parent.getCoords();
+            const type = $resizer.data.resize;
+
+            console.log(type);
+
+            const cells = this.$root.findAll(`[data-col="${$parent.data.col}"]`);
 
             document.onmousemove = e => {
                 console.log('mousemove');
+                if (type === 'col') {
                 const delta = e.pageX - coords.right;
                 const value = coords.width + delta;
                 $parent.$el.style.width = value + 'px';
+                cells.forEach(el => el.style.width = value + 'px');
+                } else {
+                    const delta = e.pageY - coords.bottom;
+                    const value = coords.height + delta;
+                    $parent.$el.style.height = value + 'px';
+                }
 
-                document.querySelectorAll(`[data-col="${$parent.data.col}"]`)
-                    .forEach(el => el.style.width = value + 'px');
             }
 
             document.onmouseup = () => {
