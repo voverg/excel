@@ -48,6 +48,10 @@ class Dom {
         return $(this.$el.closest(selector));
     }
 
+    find(selector) {
+        return $(this.$el.querySelector(selector));
+    }
+
     findAll(selector) {
         return this.$el.querySelectorAll(selector);
     }
@@ -60,14 +64,24 @@ class Dom {
             });
     }
 
+    addClass(className) {
+        return this.$el.classList.add(className);
+    }
+
+    removeClass(className) {
+        return this.$el.classList.remove(className);
+    }
+
     getCoords() {
         return this.$el.getBoundingClientRect();
     }
 }
 
+
 export function $(selector) {
     return new Dom(selector);
 }
+
 
 $.create = (tagName, classes = '') => {
     const el = document.createElement(tagName);
