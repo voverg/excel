@@ -12,7 +12,11 @@ const cods = {
 function toCell(rowIndex) {
     return function(_, colIndex) {
         return `
-            <div class="cell" data-col="${colIndex}" data-id="${rowIndex}:${colIndex}" contenteditable></div>
+            <div class="cell"
+                data-col="${colIndex}"
+                data-type="cell"
+                data-id="${rowIndex}:${colIndex}"
+                contenteditable></div>
         `
     }
 }
