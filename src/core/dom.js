@@ -55,6 +55,11 @@ class Dom {
         return this.data.id;
     }
 
+    focus() {
+        this.$el.focus();
+        return this;
+    }
+
     closest(selector) {
         return $(this.$el.closest(selector));
     }

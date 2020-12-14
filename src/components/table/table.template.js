@@ -3,12 +3,6 @@ const cods = {
     Z: 90
 }
 
-// function toCell(_, index) {
-//     return `
-//         <div class="cell" data-col=${index} contenteditable></div>
-//     `
-// }
-
 function toCell(rowIndex) {
     return function(_, colIndex) {
         return `
