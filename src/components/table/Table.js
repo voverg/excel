@@ -16,7 +16,7 @@ export class Table extends ExcelComponent {
             name: 'Table',
             listeners: ['mousedown', 'keydown', 'input'],
             ...options
-        })
+        });
     }
 
     toHtml() {
@@ -39,6 +39,10 @@ export class Table extends ExcelComponent {
 
         this.$on('formula:done', () => {
             this.selection.current.focus();
+        });
+
+        this.$subsctibe(state => {
+            console.log('TableState', state);
         })
     }
 
@@ -61,9 +65,7 @@ export class Table extends ExcelComponent {
                     
                 this.selection.selectGroup($cells);
             } else {
-                this.selection.select($target);
-
-                this.$emit('table:mousedown', $target);
+                this.selectCell($target);
             }
         }
     }
